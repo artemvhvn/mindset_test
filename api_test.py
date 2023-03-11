@@ -9,11 +9,11 @@ app.config['JSON_AS_ASCII'] = False
 
 @app.route('/<string:name>', methods=['GET', 'POST'])
 def display(name):
-    q1 = '''
+    q = '''
     MATCH (name)-[rel]-(secname) WHERE name.name = $name return name, rel, secname
     '''
     map = {'name': name}
-    results = session.run(q1, map)
+    results = session.run(q, map)
     data = results.data()
     
     return jsonify(data)
